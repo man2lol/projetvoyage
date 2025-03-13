@@ -30,9 +30,7 @@ class Router
             '500' => [DefaultController::class, 'error500'],
             'contact' => [DefaultController::class, 'contact'],
             'mentionslegales' => [DefaultController::class, 'mentionslegales'],
-            'types' => [DefaultController::class, 'types'],
-            'products' => [DefaultController::class, 'products'],
-            'users'=> [DefaultController::class, 'users'],
+            'register' => [DefaultController::class, 'register'],
         ];
         $this->defaultPage = 'home';
         $this->errorPage = '404';
