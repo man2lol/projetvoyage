@@ -5,7 +5,7 @@ declare (strict_types = 1);
 namespace MyApp\Routing;
 
 use MyApp\Controller\DefaultController;
-use MyApp\Controller\UserController;
+
 use MyApp\Service\DependencyContainer;
 
 class Router

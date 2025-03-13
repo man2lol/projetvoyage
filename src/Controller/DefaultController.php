@@ -3,9 +3,9 @@ declare (strict_types = 1);
 namespace MyApp\Controller;
 use MyApp\Service\DependencyContainer;
 use Twig\Environment;
-use MyApp\Model\TypeModel;
-use Myapp\Model\ProductModel;
-use Myapp\Model\UserModel;
+use MyApp\Model\AdministrateurModel;
+use Myapp\Model\BeneficiaireModel;
+use Myapp\Model\CircuitModel;
 
 class DefaultController
 {
@@ -58,6 +58,12 @@ echo $this->twig->render('defaultController/types.html.twig', ['types'=>$types])
     {
         $products = $this->productModel->getAllProducts();
         echo $this->twig->render('defaultController/product.html.twig', ['products'=>$products]);
+        
+    }
+    public function register()
+    {
+        $products = $this->ClientModel->getAllClients();
+        echo $this->twig->render('defaultController/register.html.twig', ['clients'=>$clients]);
         
     }
     public function users()

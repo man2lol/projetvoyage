@@ -1,9 +1,15 @@
 <?php
 namespace MyApp\Service;
 
-use MyApp\Model\ProductModel;
-use MyApp\Model\TypeModel;
-use MyApp\Model\UserModel;
+use MyApp\Model\AdministrateurModel;
+use MyApp\Model\BeneficiaireModel;
+use MyApp\Model\CircuitModel;
+use MyApp\Model\ClientModel;
+use MyApp\Model\DetailBneficiareModel;
+use MyApp\Model\EtapeModel;
+use MyApp\Model\LieuAvisiterModel;
+use MyApp\Model\ReservationModel;
+
 use PDO;
 
 class DependencyContainer
@@ -28,18 +34,45 @@ class DependencyContainer
         switch ($key) {
             case 'PDO':
                 return $this->createPDOInstance();
-            case 'TypeModel':
+
+            case 'AdministrateurModel':
 
                 $pdo = $this->get('PDO');
-                return new TypeModel($pdo);
-            case 'ProductModel':
+                return new AdministrateurModel($pdo);
+            case 'BeneficiaireModel':
 
                 $pdo = $this->get('PDO');
-                return new ProductModel($pdo);
-            case 'UserModel':
+                return new BeneficiaireModel($pdo);
+            case 'CircuitModel':
 
                 $pdo = $this->get('PDO');
-                return new UserModel($pdo);
+                return new CircuitModel($pdo);
+            case 'ClientModel':
+
+                $pdo = $this->get('PDO');
+                return new ClientModel($pdo);
+            case 'ClientModel':
+
+                $pdo = $this->get('PDO');
+                return new ClientModel($pdo);
+
+            case 'DetailBeneficiaire':
+
+                $pdo = $this->get('PDO');
+                return new DetailBeneficiaire($pdo);
+            case 'EtapeModel':
+
+                $pdo = $this->get('PDO');
+                return new EtapeModel($pdo);
+            case 'LieuAvisiter':
+
+                $pdo = $this->get('PDO');
+                return new LieuAvisiter($pdo);
+            case 'ReservationClient':
+
+                $pdo = $this->get('PDO');
+                return new ReservationClient($pdo);
+            
             default:
                 throw new \Exception("No service found for key: " . $key);
         }
