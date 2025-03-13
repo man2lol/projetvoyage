@@ -31,6 +31,7 @@ class Router
             'contact' => [DefaultController::class, 'contact'],
             'mentionslegales' => [DefaultController::class, 'mentionslegales'],
             'register' => [DefaultController::class, 'register'],
+            
         ];
         $this->defaultPage = 'home';
         $this->errorPage = '404';
