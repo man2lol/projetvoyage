@@ -1,0 +1,38 @@
+.detailEspagne {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 40px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.destination {
+    background: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.destination img {
+    width: 100%;
+    height: auto;
+}
+
+.details {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    text-align: center;
+}
+
+.details p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.details p:first-child {
+    font-weight: bold;
+}
