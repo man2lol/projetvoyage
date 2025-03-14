@@ -31,6 +31,7 @@ class Router
             'contact' => [DefaultController::class, 'contact'],
             'mentionslegales' => [DefaultController::class, 'mentionslegales'],
             'register' => [DefaultController::class, 'register'],
+            'login' => [DefaultController::class, 'login'],
             
         ];
         $this->defaultPage = 'home';
