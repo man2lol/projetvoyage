@@ -5,10 +5,10 @@ use MyApp\Model\AdministrateurModel;
 use MyApp\Model\BeneficiaireModel;
 use MyApp\Model\CircuitModel;
 use MyApp\Model\ClientModel;
-use MyApp\Model\DetailBneficiareModel;
+use MyApp\Model\DetailBeneficiaireModel;
 use MyApp\Model\EtapeModel;
 use MyApp\Model\LieuAvisiterModel;
-use MyApp\Model\ReservationModel;
+use MyApp\Model\ReservationClientModel;
 
 use PDO;
 
@@ -39,39 +39,35 @@ class DependencyContainer
 
                 $pdo = $this->get('PDO');
                 return new AdministrateurModel($pdo);
-            case 'BeneficiaireModel':
 
+            case 'BeneficiaireModel':
                 $pdo = $this->get('PDO');
                 return new BeneficiaireModel($pdo);
-            case 'CircuitModel':
 
+            case 'CircuitModel':
                 $pdo = $this->get('PDO');
                 return new CircuitModel($pdo);
-            case 'ClientModel':
 
-                $pdo = $this->get('PDO');
-                return new ClientModel($pdo);
             case 'ClientModel':
-
                 $pdo = $this->get('PDO');
                 return new ClientModel($pdo);
 
-            case 'DetailBeneficiaire':
-
+            
+            case 'DetailBeneficiaireModel':
                 $pdo = $this->get('PDO');
-                return new DetailBeneficiaire($pdo);
+                return new DetailBeneficiaireModel($pdo);
+
             case 'EtapeModel':
-
                 $pdo = $this->get('PDO');
                 return new EtapeModel($pdo);
-            case 'LieuAvisiter':
 
+            case 'LieuAvisiterModel':
                 $pdo = $this->get('PDO');
-                return new LieuAvisiter($pdo);
-            case 'ReservationClient':
+                return new LieuAvisiterModel($pdo);
 
+            case 'ReservationClientModel':
                 $pdo = $this->get('PDO');
-                return new ReservationClient($pdo);
+                return new ReservationClientModel($pdo);
             
             default:
                 throw new \Exception("No service found for key: " . $key);
