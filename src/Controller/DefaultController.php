@@ -159,14 +159,44 @@ class DefaultController
         echo $this->twig->render('defaultController/detailMaroc.html.twig');
     }
 
-    public function reservation()
+    public function reservationBresil()
     {
-        echo $this->twig->render('defaultController/reservation.html.twig');
+        echo $this->twig->render('defaultController/reservationBresil.html.twig');
     }
 
-    public function reservationPack()
+    public function reservationEspagne()
     {
-        echo $this->twig->render('defaultController/reservationPack.html.twig');
+        echo $this->twig->render('defaultController/reservationEspagne.html.twig');
+    }
+
+    public function reservationEtatUnis()
+    {
+        echo $this->twig->render('defaultController/reservationEtatUnis.html.twig');
+    }
+
+    public function reservationMaroc()
+    {
+        echo $this->twig->render('defaultController/reservationMaroc.html.twig');
+    }
+
+    public function reservationPackBresil()
+    {
+        echo $this->twig->render('defaultController/reservationPackBresil.html.twig');
+    }
+
+    public function reservationPackEspagne()
+    {
+        echo $this->twig->render('defaultController/reservationPackEspagne.html.twig');
+    }
+
+    public function reservationPackEtatUnis()
+    {
+        echo $this->twig->render('defaultController/reservationPackEtatUnis.html.twig');
+    }
+
+    public function reservationPackMaroc()
+    {
+        echo $this->twig->render('defaultController/reservationPackMaroc.html.twig');
     }
 
     public function information()

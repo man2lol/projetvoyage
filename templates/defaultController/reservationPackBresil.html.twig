@@ -26,7 +26,7 @@
             border: 1px solid #ddd;
         }
         select, input {
-            width: 100%;
+            width: 80%;
             padding: 10px;
         }
         button {
@@ -45,23 +45,18 @@
     <table>
         <tr>
             <th>Pays</th>
-            <th>Ville</th>
+            <th>Villes</th>
             <th>Nombre de personnes</th>
             <th>Action</th>
         </tr>
         <tr>
             <td>
-                <select id="pays" onchange="updateVilles()">
+                <select id="pays" onchange="updateVille()">
                     <option value="bresil">Brésil</option>
-                    <option value="etat-unis">États-Unis</option>
-                    <option value="maroc">Maroc</option>
-                    <option value="espagne">Espagne</option>
                 </select>
             </td>
             <td>
-                <select id="ville">
-                    
-                </select>
+                <input type="text" id="ville" readonly>
             </td>
             <td>
                 <input type="number" id="personnes" min="1" max="10" value="1">
@@ -74,21 +69,12 @@
 
     <script>
         const villes = {
-            "bresil": ["Rio de Janeiro", "São Paulo", "Salvador"],
-            "etat-unis": ["Boston", "New York", "Washington"],
-            "maroc": ["Rabat", "Marrakech", "Casablanca"],
-            "espagne": ["Barcelone", "Valence", "Madrid"]
+            "bresil": "Rio de Janeiro + São Paulo + Salvador",
         };
 
-        function updateVilles() {
+        function updateVille() {
             let pays = document.getElementById("pays").value;
-            let villeSelect = document.getElementById("ville");
-            villeSelect.innerHTML = "";
-            villes[pays].forEach(ville => {
-                let option = document.createElement("option");
-                option.textContent = ville;
-                villeSelect.appendChild(option);
-            });
+            document.getElementById("ville").value = villes[pays];
         }
 
         function payer() {
@@ -98,7 +84,7 @@
             alert(`Réservation confirmée pour ${personnes} personne(s) à ${ville}, ${pays.toUpperCase()}.`);
         }
 
-        window.onload = updateVilles;
+        window.onload = updateVille;
     </script>
 </body>
 </html>

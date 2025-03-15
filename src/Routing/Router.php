@@ -35,8 +35,14 @@ class Router
             'detailEspagne' => [DefaultController::class, 'detailEspagne'],
             'detailEtatUnis' => [DefaultController::class, 'detailEtatUnis'],
             'detailMaroc' => [DefaultController::class, 'detailMaroc'],
-            'reservation' => [DefaultController::class, 'reservation'],
-            'reservationPack' => [DefaultController::class, 'reservationPack'],
+            'reservationBresil' => [DefaultController::class, 'reservationBresil'],
+            'reservationEspagne' => [DefaultController::class, 'reservationEspagne'],
+            'reservationEtatUnis' => [DefaultController::class, 'reservationEtatUnis'],
+            'reservationMaroc' => [DefaultController::class, 'reservationMaroc'],
+            'reservationPackBresil' => [DefaultController::class, 'reservationPackBresil'],
+            'reservationPackEspagne' => [DefaultController::class, 'reservationPackEspagne'],
+            'reservationPackMaroc' => [DefaultController::class, 'reservationPackMaroc'],
+            'reservationPackEtatUnis' => [DefaultController::class, 'reservationPackEtatUnis'],
             'information' => [DefaultController::class, 'information'],
             
         ];
