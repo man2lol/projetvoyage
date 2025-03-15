@@ -26,20 +26,12 @@
 
 .message_bvn p {
     font-weight: bold ;
-    max-width: 1000px; /* Réduit la largeur pour compresser le texte */
-    margin: 0 auto; /* Centre le paragraphe horizontalement */
-    text-align: justify; /* Justifie le texte pour un rendu plus propre */
-    font-size: 1rem; /* Taille de police ajustée */
-    line-height: 1.6; /* Espacement entre les lignes pour une meilleure lisibilité */
-    color: #555; /* Gris foncé pour un texte plus doux */
+    max-width: 1000px; 
+    margin: 0 auto; 
+    text-align: justify;
+    font-size: 1rem;
+    line-height: 1.6; 
+    color: #555; 
 }
 
 
-footer {
-    background-image: url('https://files.oaiusercontent.com/file-5zeFR3p6RyAaatYCZR3Mhh?se=2025-03-15T10%3A36%3A37Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D711b0f18-913a-4c9e-9e2a-8bc7d722ddf3.webp&sig=WHBVk2FJTz%2BzAMOp/j9B4%2Bt6q1xt0R5oevcjYW9iHEs%3D'); /* Chemin de ton image */
-    background-size: cover; /* Ajuste l'image pour couvrir toute la largeur */
-    background-position: center; /* Centre l'image */
-    height: 600px; /* Ajuste la hauteur selon ton design */
-    width: 100%; /* Prend toute la largeur de la page */
-    position: relative;
-}

@@ -36,3 +36,12 @@
 .details p:first-child {
     font-weight: bold;
 }
+
+footer {
+    background-image: url('https://files.oaiusercontent.com/file-5zeFR3p6RyAaatYCZR3Mhh?se=2025-03-15T10%3A36%3A37Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D711b0f18-913a-4c9e-9e2a-8bc7d722ddf3.webp&sig=WHBVk2FJTz%2BzAMOp/j9B4%2Bt6q1xt0R5oevcjYW9iHEs%3D'); 
+    background-size: cover; 
+    background-position: center; 
+    height: 600px; 
+    width: 100%; 
+    position: relative;
+}
