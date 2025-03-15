@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un Circuit{% endblock %}
+
+{% block content %}
+    <h2>Ajouter un Circuit</h2>
+
+    {% if session.message is defined %}
+        <p style="color: red;">{{ session.message }}</p>
+    {% endif %}
+
+    <form method="post">
+        <label>Descriptif :</label>
+        <input type="text" name="descriptif" required>
+
+        <label>Ville de départ :</label>
+        <input type="text" name="villeDepart" required>
+
+        <label>Pays de départ :</label>
+        <input type="text" name="paysDepart" required>
+
+        <label>Ville d'arrivée :</label>
+        <input type="text" name="villeArrivee" required>
+
+        <label>Pays d'arrivée :</label>
+        <input type="text" name="paysArrivee" required>
+
+        <label>Date de départ :</label>
+        <input type="date" name="dateDepart" required>
+
+        <label>Nombre de places :</label>
+        <input type="number" name="nbrPlaces" required>
+
+        <label>Durée (jours) :</label>
+        <input type="number" name="duree" required>
+
+        <label>Prix d'inscription (€) :</label>
+        <input type="text" name="prixInscription" required>
+
+        <button type="submit">Ajouter</button>
+    </form>
+
+    <a href="index.php?page=listCircuits">⬅ Retour</a>
+{% endblock %}

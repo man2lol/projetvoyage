@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier un Circuit{% endblock %}
+
+{% block content %}
+    <h2>Modifier un Circuit</h2>
+
+    {% if session.message is defined %}
+        <p style="color: red;">{{ session.message }}</p>
+    {% endif %}
+
+    <form method="post">
+        <input type="hidden" name="id" value="{{ circuit.id }}">
+
+        <label>Descriptif :</label>
+        <input type="text" name="descriptif" value="{{ circuit.descriptif }}" required>
+
+        <label>Ville de départ :</label>
+        <input type="text" name="villeDepart" value="{{ circuit.villeDepart }}" required>
+
+        <label>Pays de départ :</label>
+        <input type="text" name="paysDepart" value="{{ circuit.paysDepart }}" required>
+
+        <label>Ville d'arrivée :</label>
+        <input type="text" name="villeArrivee" value="{{ circuit.villeArrivee }}" required>
+
+        <label>Pays d'arrivée :</label>
+        <input type="text" name="paysArrivee" value="{{ circuit.paysArrivee }}" required>
+
+        <label>Date de départ :</label>
+        <input type="date" name="dateDepart" value="{{ circuit.dateDepart }}" required>
+
+        <label>Nombre de places :</label>
+        <input type="number" name="nbrPlaces" value="{{ circuit.nbrPlaces }}" required>
+
+        <label>Durée (jours) :</label>
+        <input type="number" name="duree" value="{{ circuit.duree }}" required>
+
+        <label>Prix d'inscription (€) :</label>
+        <input type="text" name="prixInscription" value="{{ circuit.prixInscription }}" required>
+
+        <button type="submit">Modifier</button>
+    </form>
+
+    <a href="index.php?page=listCircuits">⬅ Retour</a>
+{% endblock %}

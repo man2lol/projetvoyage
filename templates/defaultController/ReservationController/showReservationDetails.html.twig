@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de la réservation{% endblock %}
+
+{% block body %}
+    <h1>Détails de la réservation</h1>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <td>{{ reservation.id }}</td>
+        </tr>
+        <tr>
+            <th>Client</th>
+            <td>{{ reservation.client.name }}</td>
+        </tr>
+        <tr>
+            <th>Circuit</th>
+            <td>{{ reservation.circuit.name }}</td>
+        </tr>
+        <tr>
+            <th>Date de réservation</th>
+            <td>{{ reservation.date_reservation }}</td>
+        </tr>
+        <tr>
+            <th>Nombre de places</th>
+            <td>{{ reservation.nbr_places_reservation }}</td>
+        </tr>
+    </table>
+
+    <a href="index.php?page=list-reservations">Retour à la liste des réservations</a>
+{% endblock %}

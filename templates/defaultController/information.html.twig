@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} Présentation de l'agence de voyage {% endblock %}
+
+{% block css %} {{ parent() }} <link rel='stylesheet' href='css/information.css'> {% endblock %}
+       
+{% block content %} 
+    <div style="text-align: center; padding: 50px; font-family: Arial, sans-serif;">
+        <h1>Bienvenue chez Wonder World Voyages</h1>
+        <p>
+            Chez <strong>Wonder World Voyages</strong>, nous nous engageons à vous offrir des expériences de voyage inoubliables.
+            Que vous souhaitiez explorer des plages paradisiaques, des villes historiques ou des aventures en pleine nature,
+            nous sommes là pour vous guider et organiser votre séjour sur mesure.
+        </p>
+        
+        <h2>Pourquoi choisir notre agence ?</h2>
+        <ul style="list-style: none; padding: 0;">
+            <li>🌍 Destinations variées à travers le monde</li>
+            <li>💼 Service client dédié et personnalisé</li>
+            <li>✈️ Offres exclusives et promotions régulières</li>
+            <li>🏨 Hébergements de qualité adaptés à tous les budgets</li>
+        </ul>
+
+        <h2>Nous contacter</h2>
+        <p>
+            📧 Email : <a href="mailto:WonderWorldFamilyTours@gmail.com">WonderWorldFamilyTours@gmail.com</a> <br>
+            📍 Adresse : 123 Avenue des Voyages, Paris, France <br>
+            📞 Téléphone : +33 1 23 45 67 89
+        </p>
+    </div>
+{% endblock %}

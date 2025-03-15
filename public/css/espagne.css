@@ -31,10 +31,13 @@
 .details p {
     margin: 5px 0;
     font-size: 14px;
+    color: black;
+    font-weight: bold;
 }
 
 .details p:first-child {
     font-weight: bold;
+    color: blue;
 }
 
 

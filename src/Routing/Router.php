@@ -30,7 +30,14 @@ class Router
             '500' => [DefaultController::class, 'error500'],
             'register' => [DefaultController::class, 'register'],
             'login' => [DefaultController::class, 'login'],
-            
+            'voyage' => [DefaultController::class, 'voyage'],
+            'detailBresil' => [DefaultController::class, 'detailBresil'],
+            'detailEspagne' => [DefaultController::class, 'detailEspagne'],
+            'detailEtatUnis' => [DefaultController::class, 'detailEtatUnis'],
+            'detailMaroc' => [DefaultController::class, 'detailMaroc'],
+            'reservation' => [DefaultController::class, 'reservation'],
+            'reservationPack' => [DefaultController::class, 'reservationPack'],
+            'information' => [DefaultController::class, 'information'],
             
         ];
         $this->defaultPage = 'home';

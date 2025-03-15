@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des réservations{% endblock %}
+
+{% block body %}
+    <h1>Liste des réservations</h1>
+
+    {% if reservations is empty %}
+        <p>Aucune réservation trouvée.</p>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Client</th>
+                    <th>Circuit</th>
+                    <th>Date</th>
+                    <th>Nombre de places</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reservation in reservations %}
+                    <tr>
+                        <td>{{ reservation.id }}</td>
+                        <td>{{ reservation.client.name }}</td>
+                        <td>{{ reservation.circuit.name }}</td>
+                        <td>{{ reservation.date_reservation }}</td>
+                        <td>{{ reservation.nbr_places_reservation }}</td>
+                        <td>
+                            <a href="index.php?page=update-reservation&id={{ reservation.id }}">Modifier</a>
+                            <a href="index.php?page=delete-reservation&id={{ reservation.id }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?');">Supprimer</a>
+                            <a href="index.php?page=show-reservation-details&id_reservation={{ reservation.id }}">Détails</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

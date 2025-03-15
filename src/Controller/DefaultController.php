@@ -121,13 +121,57 @@ class DefaultController
         echo $this->twig->render('defaultController/error403.html.twig', []);
     }
 
-    public function contact()
+
+
+
+    public function login()
     {
-        echo $this->twig->render('defaultController/contact.html.twig', []);
+        echo $this->twig->render('defaultController/login.html.twig');
     }
 
-    public function mentionsLegales()
+    public function register()
     {
-        echo $this->twig->render('defaultController/mentionsLegales.html.twig', []);
+        echo $this->twig->render('defaultController/register.html.twig');
+    }
+
+    public function voyage()
+    {
+        echo $this->twig->render('defaultController/voyage.html.twig');
+    }
+
+    public function detailBresil()
+    {
+        echo $this->twig->render('defaultController/detailBresil.html.twig');
+    }
+
+    public function detailEspagne()
+    {
+        echo $this->twig->render('defaultController/detailEspagne.html.twig');
+    }
+
+    public function detailEtatUnis()
+    {
+        echo $this->twig->render('defaultController/detailEtatUnis.html.twig');
+    }
+
+    public function detailMaroc()
+    {
+        echo $this->twig->render('defaultController/detailMaroc.html.twig');
+    }
+
+    public function reservation()
+    {
+        echo $this->twig->render('defaultController/reservation.html.twig');
+    }
+
+    public function reservationPack()
+    {
+        echo $this->twig->render('defaultController/reservationPack.html.twig');
+    }
+
+    public function information()
+    {
+        echo $this->twig->render('defaultController/information.html.twig');
     }
 }
+
