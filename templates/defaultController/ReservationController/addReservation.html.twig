@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une réservation{% endblock %}
+
+{% block body %}
+    <h1>Ajouter une réservation</h1>
+
+    {% if message is defined %}
+        <div class="alert alert-danger">{{ message }}</div>
+    {% endif %}
+
+    <form action="index.php?page=add-reservation" method="POST">
+        <div>
+            <label for="id_client">Client :</label>
+            <select name="id_client" id="id_client">
+                {% for client in clients %}
+                    <option value="{{ client.id }}">{{ client.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div>
+            <label for="id_circuit">Circuit :</label>
+            <select name="id_circuit" id="id_circuit">
+                {% for circuit in circuits %}
+                    <option value="{{ circuit.id }}">{{ circuit.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div>
+            <label for="date_reservation">Date de la réservation :</label>
+            <input type="date" name="date_reservation" id="date_reservation" required>
+        </div>
+
+        <div>
+            <label for="nbr_places_reservation">Nombre de places :</label>
+            <input type="number" name="nbr_places_reservation" id="nbr_places_reservation" required>
+        </div>
+
+        <button type="submit">Ajouter</button>
+    </form>
+{% endblock %}

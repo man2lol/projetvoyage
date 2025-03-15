@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Bénéficiaires{% endblock %}
+
+{% block content %}
+    <h2>Liste des Bénéficiaires</h2>
+
+    {% if session.message is defined %}
+        <p style="color: red;">{{ session.message }}</p>
+    {% endif %}
+
+    <ul>
+        {% for beneficiaire in beneficiaires %}
+            <li>
+                {{ beneficiaire.nom }} {{ beneficiaire.prenom }}
+                <a href="index.php?page=show-beneficiaire-reservations&id_beneficiaire={{ beneficiaire.id }}">📋 Réservations</a>
+                <a href="index.php?page=update-beneficiaire&id={{ beneficiaire.id }}">✏️ Modifier</a>
+                <a href="index.php?page=delete-beneficiaire&id={{ beneficiaire.id }}" onclick="return confirm('Supprimer ce bénéficiaire ?')">🗑️ Supprimer</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="index.php?page=add-beneficiaire">➕ Ajouter un bénéficiaire</a>
+{% endblock %}

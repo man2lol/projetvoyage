@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Liste des Clients {% endblock %}
+
+{% block content %}
+<h1>Liste des Clients</h1>
+<a href="index.php?page=add-client">Ajouter un client</a>
+
+{% if clients is empty %}
+    <p>Aucun client trouvé.</p>
+{% else %}
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Date de Naissance</th>
+        <th>Identifiant</th>
+        <th>Actions</th>
+    </tr>
+    {% for client in clients %}
+    <tr>
+        <td>{{ client.id }}</td>
+        <td>{{ client.nom }}</td>
+        <td>{{ client.prenom }}</td>
+        <td>{{ client.date_naissance }}</td>
+        <td>{{ client.identifiant }}</td>
+        <td>
+            <a href="index.php?page=update-client&id={{ client.id }}">Modifier</a> |
+            <a href="index.php?page=delete-client&id={{ client.id }}" onclick="return confirm('Supprimer ce client ?')">Supprimer</a> |
+            <a href="index.php?page=show-reservations&id={{ client.id }}">Voir réservations</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+{% endblock %}

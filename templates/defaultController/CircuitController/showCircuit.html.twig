@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails du Circuit{% endblock %}
+
+{% block content %}
+    <h2>Détails du Circuit</h2>
+
+    <p><strong>Descriptif :</strong> {{ circuit.descriptif }}</p>
+    <p><strong>Départ :</strong> {{ circuit.villeDepart }} ({{ circuit.paysDepart }})</p>
+    <p><strong>Arrivée :</strong> {{ circuit.villeArrivee }} ({{ circuit.paysArrivee }})</p>
+    <p><strong>Date :</strong> {{ circuit.dateDepart }}</p>
+    <p><strong>Durée :</strong> {{ circuit.duree }} jours</p>
+    <p><strong>Places disponibles :</strong> {{ circuit.nbrPlaces }}</p>
+    <p><strong>Prix :</strong> {{ circuit.prixInscription }}€</p>
+
+    <h3>Étapes du Circuit :</h3>
+    <ul>
+        {% for etape in etapes %}
+            <li>{{ etape.nom }} - {{ etape.description }}</li>
+        {% endfor %}
+    </ul>
+
+    <a href="index.php?page=listCircuits">⬅ Retour</a>
+{% endblock %}

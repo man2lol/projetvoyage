@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservations de {{ beneficiaire.nom }} {{ beneficiaire.prenom }}{% endblock %}
+
+{% block content %}
+    <h2>Réservations de {{ beneficiaire.nom }} {{ beneficiaire.prenom }}</h2>
+
+    {% if reservations is empty %}
+        <p>Aucune réservation trouvée.</p>
+    {% else %}
+        <ul>
+            {% for reservation in reservations %}
+                <li>Réservation #{{ reservation.id }} - Date: {{ reservation.date }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <a href="index.php?page=list-beneficiaires">⬅ Retour</a>
+{% endblock %}

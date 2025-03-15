@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Circuits{% endblock %}
+
+{% block content %}
+    <h2>Liste des Circuits</h2>
+
+    {% if session.message is defined %}
+        <p style="color: red;">{{ session.message }}</p>
+    {% endif %}
+
+    <ul>
+        {% for circuit in circuits %}
+            <li>
+                {{ circuit.descriptif }} - {{ circuit.villeDepart }} ({{ circuit.paysDepart }}) → {{ circuit.villeArrivee }} ({{ circuit.paysArrivee }})
+                <a href="index.php?page=show-circuit&id={{ circuit.id }}">📋 Voir</a>
+                <a href="index.php?page=update-circuit&id={{ circuit.id }}">✏️ Modifier</a>
+                <a href="index.php?page=delete-circuit&id={{ circuit.id }}" onclick="return confirm('Supprimer ce circuit ?')">🗑️ Supprimer</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="index.php?page=add-circuit">➕ Ajouter un circuit</a>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Administrateurs{% endblock %}
+
+{% block content %}
+    <h2>Liste des Administrateurs</h2>
+    <ul>
+        {% for admin in administrateurs %}
+            <li>
+                {{ admin.nom }} - {{ admin.identifiant }}
+                <a href="index.php?page=show-administrateur&id={{ admin.id }}">👀 Voir</a>
+                <a href="index.php?page=update-administrateur&id={{ admin.id }}">✏️ Modifier</a>
+                <a href="index.php?page=delete-administrateur&id={{ admin.id }}" onclick="return confirm('Supprimer cet administrateur ?')">🗑️ Supprimer</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="index.php?page=add-administrateur">➕ Ajouter un administrateur</a>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier la réservation{% endblock %}
+
+{% block body %}
+    <h1>Modifier la réservation</h1>
+
+    {% if message is defined %}
+        <div class="alert alert-danger">{{ message }}</div>
+    {% endif %}
+
+    <form action="index.php?page=update-reservation" method="POST">
+        <input type="hidden" name="id_reservation" value="{{ reservation.id }}">
+        
+        <div>
+            <label for="id_client">Client :</label>
+            <select name="id_client" id="id_client">
+                {% for client in clients %}
+                    <option value="{{ client.id }}" {% if client.id == reservation.client.id %}selected{% endif %}>{{ client.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div>
+            <label for="id_circuit">Circuit :</label>
+            <select name="id_circuit" id="id_circuit">
+                {% for circuit in circuits %}
+                    <option value="{{ circuit.id }}" {% if circuit.id == reservation.circuit.id %}selected{% endif %}>{{ circuit.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <label for="date_reservation">Date de la réservation :</label>
+            <input type="date" name="date_reservation" id="date_reservation" value="{{ reservation.date_reservation }}" required>
+        </div>
+
+        <div>
+            <label for="nbr_places_reservation">Nombre de places :</label>
+            <input type="number" name="nbr_places_reservation" id="nbr_places_reservation" value="{{ reservation.nbr_places_reservation }}" required>
+        </div>
+
+        <button type="submit">Mettre à jour</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Réservations de {{ client.nom }} {% endblock %}
+
+{% block content %}
+<h1>Réservations de {{ client.nom }} {{ client.prenom }}</h1>
+
+{% if reservations is empty %}
+    <p>Aucune réservation trouvée.</p>
+{% else %}
+<table>
+    <tr>
+        <th>ID Réservation</th>
+        <th>Date</th>
+        <th>Montant</th>
+        <th>Actions</th>
+    </tr>
+    {% for reservation in reservations %}
+    <tr>
+        <td>{{ reservation.id }}</td>
+        <td>{{ reservation.date }}</td>
+        <td>{{ reservation.montant }} €</td>
+        <td>
+            <a href="index.php?page=show-beneficiaries&id_reservation={{ reservation.id }}">Voir bénéficiaires</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+
+<a href="index.php?page=list-clients">Retour</a>
+{% endblock %}
