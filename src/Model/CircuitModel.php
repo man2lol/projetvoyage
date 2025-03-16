@@ -16,7 +16,7 @@ class CircuitModel
 
     public function getAllCircuits(): array
     {
-        $sql = "SELECT * FROM Circuit_";
+        $sql = "SELECT * FROM Circuit";
         $stmt = $this->db->query($sql);
         $circuits = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {

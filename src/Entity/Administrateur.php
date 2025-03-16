@@ -4,13 +4,13 @@ namespace MyApp\Entity;
 
 class Administrateur
 {
-    private int $identifiantAdmin;
+    private ?int $identifiantAdmin;
     private string $nom;
     private string $identifiant;
     private string $password;
 
     public function __construct(
-        int $identifiantAdmin,
+        ?int $identifiantAdmin,
         string $nom,
         string $identifiant,
         string $password

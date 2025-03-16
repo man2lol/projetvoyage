@@ -93,25 +93,49 @@ class AdministrateurController
     public function registerAdmin()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $nom = $_POST["nom"];
-            $identifiant = $_POST["identifiant"];
-            $password = password_hash($_POST["password"], PASSWORD_BCRYPT);
-
-            // Vérifier si l'identifiant existe déjà
-            $stmt = $this->db->prepare("SELECT * FROM Administrateur WHERE identifiant = :identifiant");
-            $stmt->execute(["identifiant" => $identifiant]);
-            if ($stmt->fetch()) {
-                echo "Cet identifiant est déjà utilisé.";
-                return;
+            $nom = htmlspecialchars($_POST["nom"], ENT_QUOTES, 'UTF-8');
+            $identifiant = htmlspecialchars($_POST["identifiant"], ENT_QUOTES, 'UTF-8');
+            $password = $_POST["password"];
+    
+            // Vérification des champs obligatoires
+            if (empty($nom) || empty($identifiant) || empty($password)) {
+                $_SESSION['message'] = '❌ Veuillez remplir tous les champs.';
+                header("Location: index.php?page=registerAdmin");
+                exit;
             }
-
-            // Insérer l’administrateur
-            $stmt = $this->db->prepare("INSERT INTO Administrateur (Nom, identifiant, password) VALUES (:nom, :identifiant, :password)");
-            $stmt->execute(["nom" => $nom, "identifiant" => $identifiant, "password" => $password]);
-
-            echo "Administrateur enregistré avec succès.";
+    
+            // Vérifier si l'identifiant existe déjà
+            $existingAdmin = $this->administrateurModel->getAdministrateurByIdentifiant($identifiant);
+            if ($existingAdmin) {
+                $_SESSION['message'] = '⚠️ Cet identifiant est déjà utilisé.';
+                header("Location: index.php?page=registerAdmin");
+                exit;
+            }
+    
+            // Hachage du mot de passe
+            $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+    
+            // Création du nouvel administrateur
+            $administrateur = new Administrateur(null, $nom, $identifiant, $hashedPassword);
+            $result = $this->administrateurModel->createAdministrateur($administrateur);
+    
+            if ($result) {
+                $_SESSION['message'] = '✅ Inscription réussie. Veuillez vous connecter.';
+                header("Location: index.php?page=loginAdmin");
+                exit;
+            } else {
+                $_SESSION['message'] = '❌ Erreur lors de l\'inscription.';
+                header("Location: index.php?page=registerAdmin");
+                exit;
+            }
         }
+    
+        // Affichage du formulaire
+        echo $this->twig->render("administrateurController/registerAdmin.html.twig");
     }
+    
+  
+
     public function loginAdmin()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {

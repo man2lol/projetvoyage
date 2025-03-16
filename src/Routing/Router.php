@@ -5,6 +5,8 @@ declare (strict_types = 1);
 namespace MyApp\Routing;
 
 use MyApp\Controller\DefaultController;
+
+
 use MyApp\Service\DependencyContainer;
 
 class Router
@@ -29,6 +31,10 @@ class Router
             '500' => [DefaultController::class, 'error500'],
             'register' => [DefaultController::class, 'register'],
             'registerAdmin' => [DefaultController::class, 'registerAdmin'],
+            'adminDashboard' => [DefaultController::class, 'adminDashboard'],
+
+
+
             'login' => [DefaultController::class, 'login'],
             'loginAdmin' => [DefaultController::class, 'loginAdmin'],
             'voyage' => [DefaultController::class, 'voyage'],

@@ -58,7 +58,8 @@
 							</div>
 						</li>
 						<!-- 🔒 Menu Admin : Visible SEULEMENT si un administrateur est connecté -->
-						{% if session.admin %}
+						{%  if session.admin is defined and session.admin is not empty %}
+
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 									⚙️ Administration
