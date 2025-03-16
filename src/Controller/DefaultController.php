@@ -129,9 +129,19 @@ class DefaultController
         echo $this->twig->render('defaultController/login.html.twig');
     }
 
+    public function loginAdmin()
+    {
+        echo $this->twig->render('defaultController/loginAdmin.html.twig');
+    }
+
     public function register()
     {
         echo $this->twig->render('defaultController/register.html.twig');
+    }
+
+    public function registerAdmin()
+    {
+        echo $this->twig->render('defaultController/registerAdmin.html.twig');
     }
 
     public function voyage()

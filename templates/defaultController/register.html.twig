@@ -11,14 +11,27 @@
 Page d'inscription :
 </div>
     <form method="post" action=""> <br>
-                <label> Nom : </label> <input type="nom" placeholder="Saisir votre nom" name="nom" required/><br>  
-                <label> prénom : </label> <input type="prénom" placeholder="Saisir votre prénom" name="prénom" required/><br> 
-                <label> Mot de passe : </label> <input type="password" placeholder="Saisir votre mot de passe" name="password" required/><br> 
-            <input type="submit" value="Se connecter">
-        </form>
-        
-Si vous posseder déja un compte vous pouvez vous connecter : <a href="index.php?page=login">Page de connexion</a>
+    
+        <label> Nom : </label> 
+        <input type="text" placeholder="Saisir votre nom" name="nom" required/><br>  
 
-<br> <br>
+        <label> Prénom : </label> 
+        <input type="text" placeholder="Saisir votre prénom" name="prenom" required/><br> 
 
-{% endblock %} 
+        <label> Date de naissance : </label> 
+        <input type="date" name="dob" required/><br>
+
+        <label> Identifiant : </label> 
+        <input type="text" placeholder="Choisissez un identifiant" name="identifiant" required/><br>
+
+        <label> Mot de passe : </label> 
+        <input type="password" placeholder="Saisir votre mot de passe" name="password" required/><br> 
+
+        <input type="submit" value="S'inscrire">
+    </form>
+
+    <p>Si vous possédez déjà un compte, vous pouvez vous connecter : <a href="index.php?page=login">Page de connexion</a></p>
+
+<br><br>
+
+{% endblock %}
