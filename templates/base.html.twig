@@ -4,69 +4,94 @@
 		<!-- Required meta tags -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="https://th.bing.com/th/id/OIP.A5aNTMtneplpUmpUXDC9lgHaFm?w=880&h=665&rs=1&pid=ImgDetMain">
+		<link rel="icon" type="image/png" href="https://th.bing.com/th/id/OIP.A5aNTMtneplpUmpUXDC9lgHaFm?w=880&h=665&rs=1&pid=ImgDetMain">
 		{% block css %}
 			<!-- Bootstrap CSS -->
-        <link href="https://bootswatch.com/5/cyborg/bootstrap.min.css" rel="stylesheet" >			
-	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+			<link href="https://bootswatch.com/5/cyborg/bootstrap.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 		{% endblock %}
 		<title>
 			{% block title %}{% endblock %}
 		</title>
 	</head>
-  <link rel='stylesheet' href='css/base.css'>
+	<link rel='stylesheet' href='css/base.css'>
 	<body class="bg-white">
-	
-	<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="index.php?page=home">✈️</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarColor01">
-      <ul class="navbar-nav me-auto">
-			
-        
-        
-        <li class="nav-item">
 
-          <a class="nav-link" href="index.php?page=information">informations</a>
-        </li>
+		<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="index.php?page=home">✈️</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarColor01">
+					<ul class="navbar-nav me-auto">
 
-         <li class="nav-item">
-          <a class="nav-link" href="index.php?page=voyage">voyages</a>
-        </li>
-         <li class="nav-item">
-          <div style="position: fixed; right: 150px; top: 10px; font-size: 16px;">
-          <a class="nav-link" href="index.php?page=register">S'inscrire </a>
-          </div>
-        </li>
-         <li class="nav-item">
-          <div style="position: fixed; right: 10px; top: 10px; font-size: 16px;">
-          <a class="nav-link" href="index.php?page=login">Se connecter </a>
-          </div>
-        </li>
-         <li class="nav-item">
-          <div style="position: fixed; right: 500px; top: 10px; font-size: 16px;">
-          <a class="nav-link" href="index.php?page=registerAdmin">S'inscrire en tant qu'admin</a>
-          </div>
-        </li>
-         <li class="nav-item">
-          <div style="position: fixed; right: 250px; top: 10px; font-size: 16px;">
-          <a class="nav-link" href="index.php?page=loginAdmin">Se connecter en tant qu'admin</a>
-          </div>
-        </li>  
-      </ul>
-      
-    </div>
-  </div>
-</nav>
-		{% block content %}{% endblock %}
-		{% block js %}
-			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-		{% endblock %}
+
+						<li class="nav-item">
+
+							<a class="nav-link" href="index.php?page=information">informations</a>
+						</li>
+
+						<li class="nav-item">
+							<a class="nav-link" href="index.php?page=voyage">voyages</a>
+						</li>
+						<li class="nav-item">
+							<div style="position: fixed; right: 150px; top: 10px; font-size: 16px;">
+								<a class="nav-link" href="index.php?page=register">S'inscrire
+								</a>
+							</div>
+						</li>
+						<li class="nav-item">
+							<div style="position: fixed; right: 10px; top: 10px; font-size: 16px;">
+								<a class="nav-link" href="index.php?page=login">Se connecter
+								</a>
+							</div>
+						</li>
+						<li class="nav-item">
+							<div style="position: fixed; right: 500px; top: 10px; font-size: 16px;">
+								<a class="nav-link" href="index.php?page=registerAdmin">S'inscrire en tant qu'admin</a>
+							</div>
+						</li>
+						<li class="nav-item">
+							<div style="position: fixed; right: 250px; top: 10px; font-size: 16px;">
+								<a class="nav-link" href="index.php?page=loginAdmin">Se connecter en tant qu'admin</a>
+							</div>
+						</li>
+						<!-- 🔒 Menu Admin : Visible SEULEMENT si un administrateur est connecté -->
+						{% if session.admin %}
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									⚙️ Administration
+								</a>
+								<ul class="dropdown-menu" aria-labelledby="adminDropdown">
+									<li>
+										<a class="dropdown-item" href="index.php?page=adminCircuits">Gérer les circuits</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="index.php?page=adminClients">Gérer les clients</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="index.php?page=adminReservations">Gérer les réservations</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="index.php?page=adminBeneficiaires">Gérer les bénéficiaires</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="index.php?page=adminList">Gérer les administrateurs</a>
+									</li>
+									<li><hr class="dropdown-divider"></li>
+									<li>
+										<a class="dropdown-item text-danger" href="index.php?page=logout">🚪 Déconnexion</a>
+									</li>
+                  
+								</ul>
+							</li>
+						{% endif %}
+					</ul>
+				</ul>
+
+			</div>
+		</div>
 	</body>
-
-<footer>
-</footer>
-</html>
+</html></nav>{% block content %}{% endblock %}{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>{% endblock %}</body><footer></footer></html>

@@ -16,7 +16,7 @@ class LieuAvisiterModel
     public function getAllLieux(): array
     {
         // Modification du nom de la table (LieuAvisiter_ au lieu de LieuAvisiter)
-        $sql = "SELECT * FROM LieuAvisiter_";
+        $sql = "SELECT * FROM LieuAvisiter";
         $stmt = $this->db->query($sql);
         $lieux = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -25,7 +25,7 @@ class LieuAvisiterModel
                 $row['Nom_lieu'], 
                 $row['ville'], 
                 $row['pays'], 
-                $row['descriptif_'], 
+                $row['descriptif'], 
                 $row['prixVisite'] // Ajout du prix de la visite
             );
         }
@@ -35,7 +35,7 @@ class LieuAvisiterModel
     public function getOneLieu(string $nom_lieu, string $ville, string $pays): ?LieuAvisiter
     {
         // Modification du nom de la table
-        $sql = "SELECT * FROM LieuAvisiter_ WHERE Nom_lieu = :nom_lieu AND ville = :ville AND pays = :pays";
+        $sql = "SELECT * FROM LieuAvisiter WHERE Nom_lieu = :nom_lieu AND ville = :ville AND pays = :pays";
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(":nom_lieu", $nom_lieu, PDO::PARAM_STR);
         $stmt->bindValue(":ville", $ville, PDO::PARAM_STR);
@@ -51,7 +51,7 @@ class LieuAvisiterModel
             $row['Nom_lieu'], 
             $row['ville'], 
             $row['pays'], 
-            $row['descriptif_'], 
+            $row['descriptif'], 
             $row['prixVisite'] // Ajout du prix de la visite
         );
     }
@@ -59,13 +59,13 @@ class LieuAvisiterModel
     public function createLieu(LieuAvisiter $lieu): bool
     {
         // Modification du nom de la table et ajout du prixVisite
-        $sql = "INSERT INTO LieuAvisiter_ (Nom_lieu, ville, pays, descriptif_, prixVisite) 
+        $sql = "INSERT INTO LieuAvisiter (Nom_lieu, ville, pays, descriptif_, prixVisite) 
                 VALUES (:nom_lieu, :ville, :pays, :descriptif_, :prixVisite)";
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':nom_lieu', $lieu->getNomLieu(), PDO::PARAM_STR);
         $stmt->bindValue(':ville', $lieu->getVille(), PDO::PARAM_STR);
         $stmt->bindValue(':pays', $lieu->getPays(), PDO::PARAM_STR);
-        $stmt->bindValue(':descriptif_', $lieu->getDescriptif(), PDO::PARAM_STR);
+        $stmt->bindValue(':descriptif', $lieu->getDescriptif(), PDO::PARAM_STR);
         $stmt->bindValue(':prixVisite', $lieu->getPrix(), PDO::PARAM_STR); // Ajout du prix
         return $stmt->execute();
     }
@@ -73,10 +73,10 @@ class LieuAvisiterModel
     public function updateLieu(LieuAvisiter $lieu): bool
     {
         // Modification du nom de la table et ajout du prixVisite
-        $sql = "UPDATE LieuAvisiter_ SET descriptif_ = :descriptif_, prixVisite = :prixVisite 
+        $sql = "UPDATE LieuAvisiter SET descriptif_ = :descriptif_, prixVisite = :prixVisite 
                 WHERE Nom_lieu = :nom_lieu AND ville = :ville AND pays = :pays";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':descriptif_', $lieu->getDescriptif(), PDO::PARAM_STR);
+        $stmt->bindValue(':descriptif', $lieu->getDescriptif(), PDO::PARAM_STR);
         $stmt->bindValue(':prixVisite', $lieu->getPrix(), PDO::PARAM_STR); // Ajout du prix
         $stmt->bindValue(':nom_lieu', $lieu->getNomLieu(), PDO::PARAM_STR);
         $stmt->bindValue(':ville', $lieu->getVille(), PDO::PARAM_STR);
@@ -87,7 +87,7 @@ class LieuAvisiterModel
     public function deleteLieu(string $nom_lieu, string $ville, string $pays): bool
     {
         // Modification du nom de la table
-        $sql = "DELETE FROM LieuAvisiter_ WHERE Nom_lieu = :nom_lieu AND ville = :ville AND pays = :pays";
+        $sql = "DELETE FROM LieuAvisiter WHERE Nom_lieu = :nom_lieu AND ville = :ville AND pays = :pays";
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':nom_lieu', $nom_lieu, PDO::PARAM_STR);
         $stmt->bindValue(':ville', $ville, PDO::PARAM_STR);

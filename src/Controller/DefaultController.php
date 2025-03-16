@@ -1,16 +1,6 @@
 <?php
 declare (strict_types = 1);
 namespace MyApp\Controller;
-use MyApp\Service\DependencyContainer;
-use Twig\Environment;
-use MyApp\Entity\Administrateur;
-use MyApp\Entity\Beneficiaire;
-use MyApp\Entity\Circuit;
-use MyApp\Entity\Client;
-use MyApp\Entity\DetailBeneficiaire;
-use MyApp\Entity\Etape;
-use MyApp\Entity\LieuAvisiter;
-use MyApp\Entity\ReservationClient;
 
 use MyApp\Model\AdministrateurModel;
 use MyApp\Model\BeneficiaireModel;
@@ -20,22 +10,20 @@ use MyApp\Model\DetailBeneficiaireModel;
 use MyApp\Model\EtapeModel;
 use MyApp\Model\LieuAvisiterModel;
 use MyApp\Model\ReservationClientModel;
-
-
+use MyApp\Service\DependencyContainer;
+use Twig\Environment;
 
 class DefaultController
 {
-    private  $twig;
-    private  $administrateurModel;
-    private  $beneficiaireModel;
-    private  $circuitModel;
-    private  $clientModel;
-    private  $detailBeneficiaireModel;
-    private  $etapeModel;
-    private  $lieuAvisiterModel;
-    private  $reservationClientModel;
-   
-    
+    private $twig;
+    private $administrateurModel;
+    private $beneficiaireModel;
+    private $circuitModel;
+    private $clientModel;
+    private $detailBeneficiaireModel;
+    private $etapeModel;
+    private $lieuAvisiterModel;
+    private $reservationClientModel;
 
     public function __construct(Environment $twig, DependencyContainer $dependencyContainer)
     {
@@ -49,8 +37,6 @@ class DefaultController
         $this->lieuAvisiterModel = $dependencyContainer->get('LieuAvisiterModel');
         $this->reservationClientModel = $dependencyContainer->get('ReservationClientModel');
     }
- 
-
 
     public function home()
     {
@@ -121,9 +107,6 @@ class DefaultController
         echo $this->twig->render('defaultController/error403.html.twig', []);
     }
 
-
-
-
     public function login()
     {
         echo $this->twig->render('defaultController/login.html.twig');
@@ -131,7 +114,7 @@ class DefaultController
 
     public function loginAdmin()
     {
-        echo $this->twig->render('defaultController/loginAdmin.html.twig');
+        echo $this->twig->render('defaultController/administrateurController/loginAdmin.html.twig');
     }
 
     public function register()
@@ -213,5 +196,91 @@ class DefaultController
     {
         echo $this->twig->render('defaultController/information.html.twig');
     }
-}
+    public function logout()
+    {
+        session_start();
+        session_destroy();
+        header("Location: index.php?page=loginAdmin"); // 🔹 Redirection vers la page de connexion admin
+        exit;
+    }
+    // 🔹 Gestion des circuits
+    public function adminCircuits()
+    {
+        echo $this->twig->render("admin/circuit_list.html.twig");
+    }
 
+    public function addCircuit()
+    {
+        echo $this->twig->render("admin/add_circuit.html.twig");
+    }
+
+    public function editCircuit()
+    {
+        echo $this->twig->render("admin/edit_circuit.html.twig");
+    }
+
+    public function deleteCircuit()
+    {
+        echo $this->twig->render("admin/delete_circuit.html.twig");
+    }
+
+// 🔹 Gestion des clients
+    public function adminClients()
+    {
+        echo $this->twig->render("admin/client_list.html.twig");
+    }
+
+    public function editClient()
+    {
+        echo $this->twig->render("admin/edit_client.html.twig");
+    }
+
+    public function deleteClient()
+    {
+        echo $this->twig->render("admin/delete_client.html.twig");
+    }
+
+// 🔹 Gestion des réservations
+    public function adminReservations()
+    {
+        echo $this->twig->render("admin/reservation_list.html.twig");
+    }
+
+    public function editReservation()
+    {
+        echo $this->twig->render("admin/edit_reservation.html.twig");
+    }
+
+    public function deleteReservation()
+    {
+        echo $this->twig->render("admin/delete_reservation.html.twig");
+    }
+
+// 🔹 Gestion des bénéficiaires
+    public function adminBeneficiaires()
+    {
+        echo $this->twig->render("admin/beneficiaire_list.html.twig");
+    }
+
+    public function editBeneficiaire()
+    {
+        echo $this->twig->render("admin/edit_beneficiaire.html.twig");
+    }
+
+    public function deleteBeneficiaire()
+    {
+        echo $this->twig->render("admin/delete_beneficiaire.html.twig");
+    }
+
+// 🔹 Gestion des administrateurs
+    public function adminList()
+    {
+        echo $this->twig->render("admin/admin_list.html.twig");
+    }
+
+    public function deleteAdmin()
+    {
+        echo $this->twig->render("admin/delete_admin.html.twig");
+    }
+
+}

@@ -5,7 +5,6 @@ declare (strict_types = 1);
 namespace MyApp\Routing;
 
 use MyApp\Controller\DefaultController;
-
 use MyApp\Service\DependencyContainer;
 
 class Router
@@ -46,7 +45,32 @@ class Router
             'reservationPackMaroc' => [DefaultController::class, 'reservationPackMaroc'],
             'reservationPackEtatUnis' => [DefaultController::class, 'reservationPackEtatUnis'],
             'information' => [DefaultController::class, 'information'],
-            
+            'logout' => [DefaultController::class, 'logout'],
+            // Routes pour la gestion des circuits
+            'adminCircuits' => [DefaultController::class, 'adminCircuits'],
+            'addCircuit' => [DefaultController::class, 'addCircuit'],
+            'editCircuit' => [DefaultController::class, 'editCircuit'],
+            'deleteCircuit' => [DefaultController::class, 'deleteCircuit'],
+
+// Routes pour la gestion des clients
+            'adminClients' => [DefaultController::class, 'adminClients'],
+            'editClient' => [DefaultController::class, 'editClient'],
+            'deleteClient' => [DefaultController::class, 'deleteClient'],
+
+// Routes pour la gestion des réservations
+            'adminReservations' => [DefaultController::class, 'adminReservations'],
+            'editReservation' => [DefaultController::class, 'editReservation'],
+            'deleteReservation' => [DefaultController::class, 'deleteReservation'],
+
+// Routes pour la gestion des bénéficiaires
+            'adminBeneficiaires' => [DefaultController::class, 'adminBeneficiaires'],
+            'editBeneficiaire' => [DefaultController::class, 'editBeneficiaire'],
+            'deleteBeneficiaire' => [DefaultController::class, 'deleteBeneficiaire'],
+
+// Routes pour la gestion des administrateurs
+            'adminList' => [DefaultController::class, 'adminList'],
+            'deleteAdmin' => [DefaultController::class, 'deleteAdmin'],
+
         ];
         $this->defaultPage = 'home';
         $this->errorPage = '404';
@@ -55,7 +79,7 @@ class Router
     public function route($twig)
     {
         $requestedPage = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_STRING);
-       
+
         // Si l'url ne contient pas la variable page, redirection vers la page d'accueil
         if (!$requestedPage) {
             $requestedPage = $this->defaultPage;

@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare (strict_types = 1);
 
 namespace MyApp\Controller;
 
@@ -7,6 +7,12 @@ use MyApp\Entity\Administrateur;
 use MyApp\Model\AdministrateurModel;
 use MyApp\Service\DependencyContainer;
 use Twig\Environment;
+
+session_start();
+if (!isset($_SESSION["admin"])) {
+    header("Location: /admin/login");
+    exit;
+}
 
 class AdministrateurController
 {
@@ -83,4 +89,49 @@ class AdministrateurController
         $administrateur = $this->administrateurModel->getOneAdministrateur($id);
         echo $this->twig->render('administrateurController/showAdministrateurDetails.html.twig', ['administrateur' => $administrateur]);
     }
+
+    public function registerAdmin()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $nom = $_POST["nom"];
+            $identifiant = $_POST["identifiant"];
+            $password = password_hash($_POST["password"], PASSWORD_BCRYPT);
+
+            // Vérifier si l'identifiant existe déjà
+            $stmt = $this->db->prepare("SELECT * FROM Administrateur WHERE identifiant = :identifiant");
+            $stmt->execute(["identifiant" => $identifiant]);
+            if ($stmt->fetch()) {
+                echo "Cet identifiant est déjà utilisé.";
+                return;
+            }
+
+            // Insérer l’administrateur
+            $stmt = $this->db->prepare("INSERT INTO Administrateur (Nom, identifiant, password) VALUES (:nom, :identifiant, :password)");
+            $stmt->execute(["nom" => $nom, "identifiant" => $identifiant, "password" => $password]);
+
+            echo "Administrateur enregistré avec succès.";
+        }
+    }
+    public function loginAdmin()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $identifiant = $_POST["identifiant"];
+            $password = $_POST["password"];
+
+            // Récupérer l'admin en base
+            $stmt = $this->db->prepare("SELECT * FROM Administrateur WHERE identifiant = :identifiant");
+            $stmt->execute(["identifiant" => $identifiant]);
+            $admin = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // Vérifier le mot de passe
+            if ($admin && password_verify($password, $admin["password"])) {
+                session_start();
+                $_SESSION["admin"] = $admin["identifiant"];
+                header("Location: /admin/dashboard");
+            } else {
+                echo "Identifiant ou mot de passe incorrect.";
+            }
+        }
+    }
+
 }

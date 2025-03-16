@@ -22,7 +22,7 @@ class CircuitModel
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $circuits[] = new Circuit(
                 $row['identifiant_circuit'],
-                $row['descriptif_'],
+                $row['descriptif'],
                 $row['villeDepart'],
                 $row['paysDepart'],
                 $row['villeArrivee'],
@@ -38,7 +38,7 @@ class CircuitModel
 
     public function getOneCircuit(int $identifiant_circuit): ?Circuit
     {
-        $sql = "SELECT * FROM Circuit_ WHERE identifiant_circuit = :identifiant_circuit";
+        $sql = "SELECT * FROM Circuit WHERE identifiant_circuit = :identifiant_circuit";
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(":identifiant_circuit", $identifiant_circuit, PDO::PARAM_INT);
         $stmt->execute();
@@ -49,7 +49,7 @@ class CircuitModel
         }
         return new Circuit(
             $row['identifiant_circuit'],
-            $row['descriptif_'],
+            $row['descriptif'],
             $row['villeDepart'],
             $row['paysDepart'],
             $row['villeArrivee'],
@@ -63,13 +63,13 @@ class CircuitModel
 
     public function createCircuit(Circuit $circuit): bool
     {
-        $sql = "INSERT INTO Circuit_ 
-                (descriptif_, villeDepart, paysDepart, villeArrivee, paysArrivee, date_Depart, nbr_place_disponible, duree, prixInscription) 
+        $sql = "INSERT INTO Circuit 
+                (descriptif, villeDepart, paysDepart, villeArrivee, paysArrivee, date_Depart, nbr_place_disponible, duree, prixInscription) 
                 VALUES 
-                (:descriptif_, :villeDepart, :paysDepart, :villeArrivee, :paysArrivee, :date_Depart, :nbr_place_disponible, :duree, :prixInscription)";
+                (:descriptif, :villeDepart, :paysDepart, :villeArrivee, :paysArrivee, :date_Depart, :nbr_place_disponible, :duree, :prixInscription)";
         
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':descriptif_', $circuit->getDescriptif(), PDO::PARAM_STR);
+        $stmt->bindValue(':descriptif', $circuit->getDescriptif(), PDO::PARAM_STR);
         $stmt->bindValue(':villeDepart', $circuit->getVilleDepart(), PDO::PARAM_STR);
         $stmt->bindValue(':paysDepart', $circuit->getPaysDepart(), PDO::PARAM_STR);
         $stmt->bindValue(':villeArrivee', $circuit->getVilleArrivee(), PDO::PARAM_STR);
@@ -83,8 +83,8 @@ class CircuitModel
 
     public function updateCircuit(Circuit $circuit): bool
     {
-        $sql = "UPDATE Circuit_ SET 
-                    descriptif_ = :descriptif_,
+        $sql = "UPDATE Circuit SET 
+                    descriptif = :descriptif_,
                     villeDepart = :villeDepart,
                     paysDepart = :paysDepart,
                     villeArrivee = :villeArrivee,
@@ -96,7 +96,7 @@ class CircuitModel
                 WHERE identifiant_circuit = :identifiant_circuit";
         
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':descriptif_', $circuit->getDescriptif(), PDO::PARAM_STR);
+        $stmt->bindValue(':descriptif', $circuit->getDescriptif(), PDO::PARAM_STR);
         $stmt->bindValue(':villeDepart', $circuit->getVilleDepart(), PDO::PARAM_STR);
         $stmt->bindValue(':paysDepart', $circuit->getPaysDepart(), PDO::PARAM_STR);
         $stmt->bindValue(':villeArrivee', $circuit->getVilleArrivee(), PDO::PARAM_STR);
@@ -111,7 +111,7 @@ class CircuitModel
 
     public function deleteCircuit(int $identifiant_circuit): bool
     {
-        $sql = "DELETE FROM Circuit_ WHERE identifiant_circuit = :identifiant_circuit";
+        $sql = "DELETE FROM Circuit WHERE identifiant_circuit = :identifiant_circuit";
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':identifiant_circuit', $identifiant_circuit, PDO::PARAM_INT);
         return $stmt->execute();
