@@ -9,11 +9,7 @@ use MyApp\Entity\Circuit;
 use MyApp\Service\DependencyContainer;
 use Twig\Environment;
 
-session_start();
-if (!isset($_SESSION["admin"])) {
-    header("Location: /admin/login");
-    exit;
-}
+
 
 class CircuitController
 {
