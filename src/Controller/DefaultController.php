@@ -191,7 +191,8 @@ class DefaultController
     {
         session_start();
         session_destroy();
-        header("Location: index.php?page=loginAdmin"); // 🔹 Redirection vers la page de connexion admin
+        $_SESSION = [];
+        header("Location: index.php?page=home");
         exit;
     }
     public function adminCircuits()
