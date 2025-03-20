@@ -60,7 +60,7 @@ class ClientModel
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':nom', $client->getNom(), PDO::PARAM_STR);
         $stmt->bindValue(':prenom', $client->getPrenom(), PDO::PARAM_STR);
-        $stmt->bindValue(':date_naissance', $client->getDateNaissance(), PDO::PARAM_STR);
+        $stmt->bindValue(':date_naissance', $client->getDate_naissance(), PDO::PARAM_STR);
         $stmt->bindValue(':identifiant', $client->getIdentifiant(), PDO::PARAM_STR);
         $stmt->bindValue(':password', $client->getPassword(), PDO::PARAM_STR);
         return $stmt->execute();
@@ -74,7 +74,7 @@ class ClientModel
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':nom', $client->getNom(), PDO::PARAM_STR);
         $stmt->bindValue(':prenom', $client->getPrenom(), PDO::PARAM_STR);
-        $stmt->bindValue(':date_naissance', $client->getDateNaissance(), PDO::PARAM_STR);
+        $stmt->bindValue(':date_naissance', $client->getDate_naissance(), PDO::PARAM_STR);
         $stmt->bindValue(':identifiant', $client->getIdentifiant(), PDO::PARAM_STR);
         $stmt->bindValue(':password', $client->getPassword(), PDO::PARAM_STR);
         $stmt->bindValue(':id', $client->getIdClient(), PDO::PARAM_INT);
@@ -88,4 +88,30 @@ class ClientModel
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
+    
+
+    public function getClientByIdentifiant(string $identifiant): ?Client
+{
+    $sql = "SELECT * FROM Client WHERE identifiant = :identifiant";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(":identifiant", $identifiant, PDO::PARAM_STR);
+    $stmt->execute();
+
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    if (!$row) {
+        return null;
+    }
+
+    return new Client(
+        $row['identifiantClient'],
+        $row['Nom'],
+        $row['Prenom'],
+        $row['date_naissance'],
+        $row['identifiant'],
+        $row['password']
+    );
+}
+
+    
+
 }

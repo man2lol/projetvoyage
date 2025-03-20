@@ -29,14 +29,21 @@ class Router
             'home' => [DefaultController::class, 'home'],
             '404' => [DefaultController::class, 'error404'],
             '500' => [DefaultController::class, 'error500'],
-            'register' => [DefaultController::class, 'register'],
+          
+
+
             'registerAdmin' => [DefaultController::class, 'registerAdmin'],
             'adminDashboard' => [DefaultController::class, 'adminDashboard'],
-
-
-
-            'login' => [DefaultController::class, 'login'],
             'loginAdmin' => [DefaultController::class, 'loginAdmin'],
+
+            'logout' => [DefaultController::class, 'logout'],
+
+
+
+            'loginClient' => [DefaultController::class, 'loginClient'],
+            'registerClient' => [DefaultController::class, 'registerClient'],
+
+            
             'voyage' => [DefaultController::class, 'voyage'],
             'detailBresil' => [DefaultController::class, 'detailBresil'],
             'detailEspagne' => [DefaultController::class, 'detailEspagne'],
@@ -51,29 +58,29 @@ class Router
             'reservationPackMaroc' => [DefaultController::class, 'reservationPackMaroc'],
             'reservationPackEtatUnis' => [DefaultController::class, 'reservationPackEtatUnis'],
             'information' => [DefaultController::class, 'information'],
-            'logout' => [DefaultController::class, 'logout'],
+            
             // Routes pour la gestion des circuits
             'adminCircuits' => [DefaultController::class, 'adminCircuits'],
             'addCircuit' => [DefaultController::class, 'addCircuit'],
             'editCircuit' => [DefaultController::class, 'editCircuit'],
             'deleteCircuit' => [DefaultController::class, 'deleteCircuit'],
 
-// Routes pour la gestion des clients
+
             'adminClients' => [DefaultController::class, 'adminClients'],
             'editClient' => [DefaultController::class, 'editClient'],
             'deleteClient' => [DefaultController::class, 'deleteClient'],
 
-// Routes pour la gestion des réservations
+
             'adminReservations' => [DefaultController::class, 'adminReservations'],
             'editReservation' => [DefaultController::class, 'editReservation'],
             'deleteReservation' => [DefaultController::class, 'deleteReservation'],
 
-// Routes pour la gestion des bénéficiaires
+
             'adminBeneficiaires' => [DefaultController::class, 'adminBeneficiaires'],
             'editBeneficiaire' => [DefaultController::class, 'editBeneficiaire'],
             'deleteBeneficiaire' => [DefaultController::class, 'deleteBeneficiaire'],
 
-// Routes pour la gestion des administrateurs
+
             'adminList' => [DefaultController::class, 'adminList'],
             'deleteAdmin' => [DefaultController::class, 'deleteAdmin'],
 

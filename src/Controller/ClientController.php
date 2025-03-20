@@ -32,14 +32,14 @@ class ClientController
         $this->beneficiaireModel = $dependencyContainer->get('BeneficiaireModel');
     }
 
-    // 🔹 Liste des clients
+   
     public function listClients()
     {
         $clients = $this->clientModel->getAllClients();
         echo $this->twig->render('clientController/listClients.html.twig', ['clients' => $clients]);
     }
 
-    // 🔹 Ajouter un client
+   
     public function addClient()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -60,7 +60,7 @@ class ClientController
         echo $this->twig->render('clientController/addClient.html.twig');
     }
 
-    // 🔹 Modifier un client
+   
     public function updateClient()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -84,7 +84,7 @@ class ClientController
         }
     }
 
-    // 🔹 Supprimer un client
+   
     public function deleteClient()
     {
         $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
@@ -92,7 +92,7 @@ class ClientController
         header('Location: index.php?page=list-clients');
     }
 
-    // 🔹 Afficher les réservations d'un client
+   
     public function showClientReservations()
     {
         $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
@@ -105,7 +105,7 @@ class ClientController
         ]);
     }
 
-    // 🔹 Voir les bénéficiaires d'une réservation
+  
     public function showBeneficiaries()
     {
         $id_reservation = filter_input(INPUT_GET, 'id_reservation', FILTER_SANITIZE_NUMBER_INT);

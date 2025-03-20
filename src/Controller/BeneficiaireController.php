@@ -24,14 +24,14 @@ class BeneficiaireController
         $this->detailBeneficiaireModel = $dependencyContainer->get('DetailBeneficiaireModel');
     }
 
-    // 🔹 Liste des bénéficiaires
+   
     public function listBeneficiaires()
     {
         $beneficiaires = $this->beneficiaireModel->getAllBeneficiaires();
         echo $this->twig->render('beneficiaireController/listBeneficiaires.html.twig', ['beneficiaires' => $beneficiaires]);
     }
 
-    // 🔹 Ajouter un bénéficiaire
+   
     public function addBeneficiaire()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -49,7 +49,7 @@ class BeneficiaireController
         echo $this->twig->render('beneficiaireController/addBeneficiaire.html.twig');
     }
 
-    // 🔹 Modifier un bénéficiaire
+  
     public function updateBeneficiaire()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -71,16 +71,15 @@ class BeneficiaireController
         }
     }
 
-    // 🔹 Supprimer un bénéficiaire
     public function deleteBeneficiaire()
     {
         $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 
-        // Avant de supprimer un bénéficiaire, vérifier s'il est associé à une réservation
+       
         $details = $this->detailBeneficiaireModel->getBeneficiairesByBeneficiaireId($id);
         
         if (empty($details)) {
-            // Si le bénéficiaire n'est pas associé à une réservation, on peut le supprimer
+           
             $this->beneficiaireModel->deleteBeneficiaire($id);
             header('Location: index.php?page=list-beneficiaires');
         } else {
@@ -88,7 +87,7 @@ class BeneficiaireController
         }
     }
 
-    // 🔹 Afficher les réservations d'un bénéficiaire
+   
     public function showBeneficiaireReservations()
     {
         $id_beneficiaire = filter_input(INPUT_GET, 'id_beneficiaire', FILTER_SANITIZE_NUMBER_INT);

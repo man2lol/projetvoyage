@@ -1,0 +1,43 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} | Page d'inscription Client {% endblock %}
+
+{% block css %} 
+    {{ parent() }} 
+    <link rel='stylesheet' href='css/login.css'> 
+{% endblock %}
+       
+{% block content %} 
+
+<div class="textelogin"> 
+    
+    <h2>Page d'inscription Client :</h2>
+</div>
+
+
+<form method="post" action="index.php?page=registerClient"> <br>
+    
+    <label> Nom : </label> 
+    <input type="text" placeholder="Saisir votre nom" name="nom" required/><br>  
+
+    <label> Prénom : </label> 
+    <input type="text" placeholder="Saisir votre prénom" name="prenom" required/><br> 
+
+    <label> Date de naissance : </label> 
+    <input type="date" name="date_naissance" required/><br> <!-- 🔹 Correction ici -->
+
+    <label> Identifiant : </label> 
+    <input type="text" placeholder="Choisissez un identifiant" name="identifiant" required/><br>
+
+    <label> Mot de passe : </label> 
+    <input type="password" placeholder="Saisir votre mot de passe" name="password" required/><br> 
+    <small>Le mot de passe doit contenir au moins 8 caractères.</small><br>
+
+    <input type="submit" value="S'inscrire">
+</form>
+
+<p>Si vous possédez déjà un compte, vous pouvez vous connecter : <a href="index.php?page=loginClient">Page de connexion</a></p>
+
+<br><br>
+
+{% endblock %}

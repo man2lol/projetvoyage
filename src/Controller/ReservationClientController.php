@@ -27,14 +27,14 @@ class ReservationClientController
         $this->circuitModel = $dependencyContainer->get('CircuitModel');
     }
 
-    // 🔹 Liste des réservations des clients
+   
     public function listReservations()
     {
         $reservations = $this->reservationModel->getAllReservations();
         echo $this->twig->render('reservationClientController/listReservations.html.twig', ['reservations' => $reservations]);
     }
 
-    // 🔹 Ajouter une réservation
+   
     public function addReservation()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -52,7 +52,7 @@ class ReservationClientController
             }
         }
 
-        // Récupération des clients et circuits pour affichage dans le formulaire
+       
         $clients = $this->clientModel->getAllClients();
         $circuits = $this->circuitModel->getAllCircuits();
         
@@ -62,7 +62,7 @@ class ReservationClientController
         ]);
     }
 
-    // 🔹 Modifier une réservation
+   
     public function updateReservation()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -93,7 +93,7 @@ class ReservationClientController
         }
     }
 
-    // 🔹 Supprimer une réservation
+    
     public function deleteReservation()
     {
         $id_reservation = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
@@ -101,7 +101,7 @@ class ReservationClientController
         header('Location: index.php?page=list-reservations');
     }
 
-    // 🔹 Afficher les détails de la réservation
+  
     public function showReservationDetails()
     {
         $id_reservation = filter_input(INPUT_GET, 'id_reservation', FILTER_SANITIZE_NUMBER_INT);

@@ -2,6 +2,7 @@
 declare (strict_types = 1);
 namespace MyApp\Controller;
 
+use MyApp\Entity\Client;
 use MyApp\Entity\Administrateur;
 use MyApp\Model\AdministrateurModel;
 use MyApp\Model\BeneficiaireModel;
@@ -113,10 +114,7 @@ class DefaultController
         echo $this->twig->render('defaultController/login.html.twig');
     }
 
-    public function register()
-    {
-        echo $this->twig->render('defaultController/register.html.twig');
-    }
+  
 
     public function voyage()
     {
@@ -187,14 +185,7 @@ class DefaultController
     {
         echo $this->twig->render('defaultController/information.html.twig');
     }
-    public function logout()
-    {
-        session_start();
-        session_destroy();
-        $_SESSION = [];
-        header("Location: index.php?page=home");
-        exit;
-    }
+    
     public function adminCircuits()
     {
         echo $this->twig->render("CircuitController/listCircuits.html.twig");
@@ -215,7 +206,7 @@ class DefaultController
         echo $this->twig->render("CircuitController/showCircuit.html.twig");
     }
 
-// 🔹 Gestion des clients
+
     public function adminClients()
     {
         echo $this->twig->render("ClientController/listClients.html.twig");
@@ -231,7 +222,7 @@ class DefaultController
         echo $this->twig->render("ClientController/showReservations.html.twig");
     }
 
-// 🔹 Gestion des réservations
+
     public function adminReservations()
     {
         echo $this->twig->render("ReservationController/listReservations.html.twig");
@@ -247,7 +238,7 @@ class DefaultController
         echo $this->twig->render("ReservationController/showReservationDetails.html.twig");
     }
 
-// 🔹 Gestion des bénéficiaires
+
     public function adminBeneficiaires()
     {
         echo $this->twig->render("BeneficiaireController/listBeneficiaires.html.twig");
@@ -263,7 +254,7 @@ class DefaultController
         echo $this->twig->render("BeneficiaireController/showBeneficiaireReservation.html.twig");
     }
 
-// 🔹 Gestion des administrateurs
+
     public function adminList()
     {
         echo $this->twig->render("administrateurController/listAdministrateurs.html.twig");
@@ -281,84 +272,167 @@ class DefaultController
             $identifiant = htmlspecialchars($_POST["identifiant"], ENT_QUOTES, 'UTF-8');
             $password = $_POST["password"];
 
-            // Vérification des champs obligatoires
             if (empty($nom) || empty($identifiant) || empty($password)) {
-                $_SESSION['message'] = '❌ Veuillez remplir tous les champs.';
+                $_SESSION['message'] = ' Veuillez remplir tous les champs.';
                 header("Location: index.php?page=registerAdmin");
                 exit;
             }
 
-            // Vérifier si l'identifiant existe déjà
+           
             $existingAdmin = $this->administrateurModel->getAdministrateurByIdentifiant($identifiant);
             if ($existingAdmin) {
-                $_SESSION['message'] = '⚠️ Cet identifiant est déjà utilisé.';
+                $_SESSION['message'] = ' Cet identifiant est déjà utilisé.';
                 header("Location: index.php?page=registerAdmin");
                 exit;
             }
 
-            // Hachage du mot de passe
+            
             $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-
-            // Création du nouvel administrateur
+            
+           
             $administrateur = new Administrateur(null, $nom, $identifiant, $hashedPassword);
             $result = $this->administrateurModel->createAdministrateur($administrateur);
 
             if ($result) {
-                $_SESSION['message'] = '✅ Inscription réussie. Veuillez vous connecter.';
+                $_SESSION['message'] = ' Inscription réussie. Veuillez vous connecter.';
                 header("Location: index.php?page=loginAdmin");
                 exit;
             } else {
-                $_SESSION['message'] = '❌ Erreur lors de l\'inscription.';
+                $_SESSION['message'] = ' Erreur lors de l\'inscription.';
                 header("Location: index.php?page=registerAdmin");
                 exit;
             }
         }
 
-        // Affichage du formulaire
         echo $this->twig->render("defaultController/registerAdmin.html.twig");
     }
     public function loginAdmin()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            
             $identifiant = filter_input(INPUT_POST, 'identifiant', FILTER_SANITIZE_STRING);
             $password = $_POST['password'];
     
             if (!$identifiant || !$password) {
-                $_SESSION['message'] = '❌ Identifiant ou mot de passe erroné.';
+                $_SESSION['message'] = ' Identifiant ou mot de passe erroné.';
                 header('Location: index.php?page=loginAdmin');
                 exit;
             }
     
-            // 🔍 Vérifier si l'admin existe en base
+           
             $admin = $this->administrateurModel->getAdministrateurByIdentifiant($identifiant);
     
-            if (!$admin) {
-                $_SESSION['message'] = '❌ Identifiant incorrect.';
+            if (!$admin || !password_verify($password, $admin->getPassword())) {
+                $_SESSION['message'] = ' Identifiant ou mot de passe erroné.';
                 header('Location: index.php?page=loginAdmin');
                 exit;
             }
     
-            // 🔵 Vérifier le mot de passe
-            if (!password_verify($password, $admin->getPassword())) {
-                $_SESSION['message'] = '❌ Mot de passe erroné.';
-                header('Location: index.php?page=loginAdmin');
-                exit;
-            }
-    
-            // ✅ Connexion réussie → Stocker l'admin en session
+            
             session_start();
             $_SESSION['admin'] = $admin->getIdentifiant();
             $_SESSION['admin_id'] = $admin->getIdentifiantAdmin();
-            $_SESSION['message'] = '✅ Connexion réussie !';
+            $_SESSION['message'] = ' Connexion réussie !';
     
-            // ✅ Redirection vers le dashboard
-            header('Location: index.php?page=adminDashboard');
+         
+    
+            
+            header('Location: index.php?page=home');
             exit;
         }
     
         echo $this->twig->render("defaultController/loginAdmin.html.twig");
     }
+    public function logout()
+    {
+        session_start();
+        session_destroy();
+        $_SESSION = [];
+        header("Location: index.php?page=home");
+        exit;
+    }
+    public function registerClient()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $nom = htmlspecialchars($_POST["nom"], ENT_QUOTES, 'UTF-8');
+            $prenom = htmlspecialchars($_POST["prenom"], ENT_QUOTES, 'UTF-8');
+            $date_naissance = $_POST["date_naissance"];
+            $identifiant = htmlspecialchars($_POST["identifiant"], ENT_QUOTES, 'UTF-8');
+            $password = $_POST["password"];
     
+            if (empty($nom) || empty($prenom) || empty($date_naissance) || empty($identifiant) || empty($password)) {
+                $_SESSION['message'] = ' Veuillez remplir tous les champs.';
+                header("Location: index.php?page=registerClient");
+                exit;
+            }
+    
+            $existingClient = $this->clientModel->getClientByIdentifiant($identifiant);
+            if ($existingClient) {
+                $_SESSION['message'] = ' Cet identifiant est déjà utilisé.';
+                header("Location: index.php?page=registerClient");
+                exit;
+            }
+    
+            if (!strtotime($date_naissance)) {
+                $_SESSION['message'] = ' La date de naissance n\'est pas valide.';
+                header("Location: index.php?page=registerClient");
+                exit;
+            }
+    
+            if (strlen($password) < 8) {
+                $_SESSION['message'] = ' Le mot de passe doit contenir au moins 8 caractères.';
+                header("Location: index.php?page=registerClient");
+                exit;
+            }
+    
+            $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+    
+            $client = new Client(null, $nom, $prenom, $date_naissance, $identifiant, $hashedPassword);
+            $this->clientModel->createClient($client);
+    
+            $_SESSION['message'] = ' Inscription réussie. Veuillez vous connecter.';
+            header("Location: index.php?page=loginClient");
+            exit;
+        }
+    
+        echo $this->twig->render("defaultController/registerClient.html.twig");
+    }
+    
+    public function loginClient()
+{
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $identifiant = filter_input(INPUT_POST, 'identifiant', FILTER_SANITIZE_STRING);
+        $password = $_POST['password'];
+
+        if (!$identifiant || !$password) {
+            $_SESSION['message'] = ' Identifiant ou mot de passe erroné.';
+            header('Location: index.php?page=loginClient');
+            exit;
+        }
+
+      
+        $client = $this->clientModel->getClientByIdentifiant($identifiant);
+
+        if (!$client || !password_verify($password, $client->getPassword())) {
+            $_SESSION['message'] = ' Identifiant ou mot de passe erroné.';
+            header('Location: index.php?page=loginClient');
+            exit;
+        }
+
+       
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        $_SESSION['client'] = $client->getIdentifiant();
+        $_SESSION['client_id'] = $client->getIdentifiantClient();
+        $_SESSION['message'] = ' Connexion réussie !';
+       
+        header('Location: index.php?page=home');
+        exit;
+    }
+
+    echo $this->twig->render("defaultController/loginClient.html.twig");
+}
+
 
 }
